@@ -1,0 +1,78 @@
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-color:#E4E4E4;
+    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #A7A7A7),
+        color-stop(0.51, #E4E4E4)
+    );
+    background-attachment:fixed;
+    font-family: Futura,Trebuchet MS,Arial,sans-serif;
+    font-size:20px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    text-transform:uppercase;
+    width:100%;
+}
+
+.btn{
+	background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.01) 5%, rgba(0, 0, 0, 0.1));
+	font-family: inherit;
+	font-size: 100%;
+	padding: 0.5em 1em;
+	color: rgba(0, 0, 0, 0.7);
+	background-color: #F1F1F1;
+	text-decoration: none;
+	border-radius: .1em;
+	display: inline-block;
+	line-height: normal;
+	white-space: nowrap;
+	vertical-align: baseline;
+	text-align: center;
+	cursor: pointer;
+	-moz-user-select: none;
+}
+
+.highlight, .btn.highlight{
+	background-color: #CFDDFF;
+}
+
+.banner{
+	background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.59) -25%, rgba(32, 21, 2, 0.6));
+	width: 100%;
+	text-align:center;
+	box-shadow: 0 .15em .2em #B1B1B1;
+}
+.banner div.buttons{
+	padding:.2em 0;
+	margin: 0 auto;
+}
+
+.plumb{
+	width:100%;
+	min-height:25em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

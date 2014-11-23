@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Skills</title>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+        <link rel="stylesheet" type="text/css" href="/css/index.css" />
+		<link rel="stylesheet" type="text/css" href="/css/common.css" />
+		
+		<script type="text/javascript" src="/js/plugins/jquery.js"></script>
+		<script type="text/javascript" src="/js/plugins/jquery-ui/jquery-ui.js"></script>
+		<script type="text/javascript" src="/js/plugins/jsPlumb/src/jquery.jsPlumb.js"></script>
+        <script type="text/javascript" src="/js/skills.js"></script>
+    </head>
+    <body>
+		<script>
+			jsPlumb.ready(function() {
+				jsPlumb.setContainer($("#plumb"));
+				var plumb = jsPlumb.getInstance();
+				plumb.importDefaults({
+				  Connector : [ "Bezier", { curviness: 150 } ],
+				  Anchors : [ "TopCenter", "BottomCenter" ]
+				});
+
+				plumb.connect({
+				  source:"element1", 
+				  target:"element2", 
+				  scope:"someScope" 
+				});
+			});
+		</script>
+		<div class="banner">
+			<div class="buttons">
+				<a href="/page/traits.html" id="traits" class="btn">Traits</a>
+				<a href="/page/bio.html" id="bio" class="btn">Bio</a>
+				<a href="/page/items.html" id="items" class="btn">Items</a>
+				<a id="skills" class="btn highlight">Skills</a>
+			</div>
+		</div>
+		<div class="plumb" id="plumb">
+		
+		</div>
+    </body>
+</html>
