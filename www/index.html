@@ -26,16 +26,44 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
 		<link rel="stylesheet" type="text/css" href="css/common.css" />
-        <title>Index</title>
         <script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="/js/plugins/jquery.js"></script>
+		<script type="text/javascript" src="/js/plugins/jquery-ui/jquery-ui.js"></script>
+		<!-- <script type="text/javascript" src="/js/plugins/jsPlumb/src/jquery.jsPlumb.js"></script> -->
+        <!-- <script type="text/javascript" src="/js/skills.js"></script> -->
+        <title>Index</title>
     </head>
     <body>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$(".banner .buttons a.btn").on("click", function(){
+					$(".banner .buttons a.btn").removeClass("highlight");
+					$(this).addClass("highlight");
+					$("#tabs .tab").hide(200);
+					$("#"+$(this).data("tab")).show(200);
+				});
+			});
+		</script>
 		<div class="banner">
 			<div class="buttons">
-				<a href="/page/traits.html" id="traits" class="btn">Traits</a>
-				<a href="/page/bio.html" id="bio" class="btn">Bio</a>
-				<a href="/page/items.html" id="items" class="btn">Items</a>
-				<a href="/page/skills.html" id="skills" class="btn">Skills</a>
+				<a data-tab="traits" id="traits_btn" class="btn">Traits</a>
+				<a data-tab="bio" id="bio_btn" class="btn">Bio</a>
+				<a data-tab="items" id="items_btn" class="btn">Items</a>
+				<a data-tab="skills" id="skills_btn" class="btn">Skills</a>
+			</div>
+		</div>
+		<div id="tabs">
+			<div id="traits" class="tab" style="display:none">
+				<img src="/img/Espy.png" style="width:50%"></img>
+			</div>
+			<div id="bio" class="tab" style="display:none">
+				<img src="/img/Salter.gif" style="width:50%"></img>
+			</div>
+			<div id="items" class="tab" style="display:none">
+				<img src="/img/frown.jpg" style="width:50%"></img>
+			</div>
+			<div id="skills" class="tab" style="display:none">
+				<img src="/img/steampunk.jpg" style="width:50%"></img>
 			</div>
 		</div>
     </body>

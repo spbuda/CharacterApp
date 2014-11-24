@@ -41,15 +41,22 @@ body {
 	-moz-user-select: none;
 }
 
+#tabs{
+    margin-top:3em;
+}
+
 .highlight, .btn.highlight{
-	background-color: #CFDDFF;
+	background-color: rgba(255, 215, 134, 1);
 }
 
 .banner{
-	background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.59) -25%, rgba(32, 21, 2, 0.6));
+	background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.75) -25%, rgba(32, 21, 2, 0.8));
 	width: 100%;
 	text-align:center;
-	box-shadow: 0 .15em .2em #B1B1B1;
+	/* box-shadow: 0 .15em .2em #B1B1B1; */
+	position: fixed;
+	right: 0;
+	top: 0;
 }
 .banner div.buttons{
 	padding:.2em 0;
