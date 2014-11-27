@@ -8,8 +8,8 @@ jsPlumb.ready(function() {
 	});
 
 	plumb.connect({
-	  source:"element1", 
-	  target:"element2", 
-	  scope:"someScope" 
+	  source:"#element1", 
+	  target:"#element2", 
+	  scope:"#plumb" 
 	});
 });
