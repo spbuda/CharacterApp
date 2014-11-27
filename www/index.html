@@ -26,11 +26,36 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
 		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="/css/font-awesome/css/font-awesome.min.css">
+		
         <script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="/js/plugins/jquery.js"></script>
 		<script type="text/javascript" src="/js/plugins/jquery-ui/jquery-ui.js"></script>
-		<!-- <script type="text/javascript" src="/js/plugins/jsPlumb/src/jquery.jsPlumb.js"></script> -->
-        <!-- <script type="text/javascript" src="/js/skills.js"></script> -->
+		
+		<!-- jsPlumb init -->
+		<script src="/js/plugins/jsPlumb/lib/jsBezier-0.6.js"></script>
+        <script src="/js/plugins/jsPlumb/lib/mottle-0.4.js"></script>
+        <script src="/js/plugins/jsPlumb/lib/biltong-0.2.js"></script>
+		<script src="/js/plugins/jsPlumb/src/util.js"></script>
+		<script src="/js/plugins/jsPlumb/src/browser-util.js"></script>
+		<script src="/js/plugins/jsPlumb/src/dom-adapter.js"></script>
+		<script src="/js/plugins/jsPlumb/src/jsPlumb.js"></script>
+		<script src="/js/plugins/jsPlumb/src/endpoint.js"></script>
+		<script src="/js/plugins/jsPlumb/src/connection.js"></script>
+		<script src="/js/plugins/jsPlumb/src/anchors.js"></script>
+		<script src="/js/plugins/jsPlumb/src/defaults.js"></script>
+        <script src="/js/plugins/jsPlumb/src/connectors-bezier.js"></script>
+		<script src="/js/plugins/jsPlumb/src/connectors-statemachine.js"></script>
+		<script src="/js/plugins/jsPlumb/src/connectors-flowchart.js"></script>
+        <script src="/js/plugins/jsPlumb/src/connector-editors.js"></script>
+		<script src="/js/plugins/jsPlumb/src/renderers-svg.js"></script>
+		<script src="/js/plugins/jsPlumb/src/renderers-vml.js"></script>
+        <script src="/js/plugins/jsPlumb/src/base-library-adapter.js"></script>
+        <script src="/js/plugins/jsPlumb/src/jquery.jsPlumb.js"></script>
+		
+		<!-- page scripts -->
+        <script type="text/javascript" src="/js/skills.js"></script>
+		
         <title>Index</title>
     </head>
     <body>
@@ -64,10 +89,19 @@
 				<img src="/img/frown.jpg" style="width:50%"></img>
 			</div>
 			<div id="skills" class="tab" style="display:none">
-				<img src="/img/steampunk.jpg" style="width:50%"></img>
+				<div class="plumb" id="plumb">
+					<div id="element1" class="node">
+						<div class="nodeText">Test</div>
+						<div class="nodeButtons">
+							<div class="nodeNumber highlight">3</div>
+							<div class="nodeEdit highlight"><i class="fa fa-pencil-square-o"></i></div>
+							<div class="nodeCreate">&nbsp;</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div id="map" class="tab" style="display:none">
-				<img src="/img/mappityMap.jpg"  class="map" ></img>
+				<img src="/img/mappityMap.jpg" class="map" ></img>
 			</div>
 		</div>
     </body>

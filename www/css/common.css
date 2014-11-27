@@ -46,15 +46,15 @@ body {
 }
 
 .tab{
+}
+
+.tab > div:first-of-type{
 	width:95%;
     margin-left: auto;
     margin-right: auto;
 }
 
 .map{
-	margin-left: auto;
-	margin-right:auto;
-	width:100%;
 }
 
 .highlight, .btn.highlight{
@@ -76,8 +76,67 @@ body {
 }
 
 .plumb{
-	width:100%;
 	min-height:25em;
+}
+
+.node{
+	max-width: 20em;
+	margin:.8em;
+}
+
+.nodeText{
+	cursor:move;
+	max-width: 20em;
+	background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.01) 5%, rgba(0, 0, 0, 0.1));
+	color: rgba(0, 0, 0, 0.7);
+	background-color: #F1F1F1;
+	border-radius: .2em .2em 0 0;
+	padding: 0.5em 1em .8em;
+	min-height: 1em;
+	text-align: center;
+}
+
+.nodeButtons{
+	margin-top:-.4em;
+	overflow:hidden;
+	font-size:1.5em;
+}
+
+.nodeButtons > div{
+	padding:0;
+	cursor:pointer;
+}
+
+.nodeNumber{
+	float:left;
+	width: 15%;
+	background: linear-gradient(180deg, rgba(221, 221, 221, 0) 0%,rgba(221, 221, 221, 1) 13%);
+	border-bottom: solid 1px rgba(200, 200, 200, 1);
+	border-radius: 0 0 .2em .2em;
+	text-align: center;
+}
+
+.nodeEdit{
+	float:right;
+	min-height:1em;
+	width: 15%;
+	background: linear-gradient(180deg, rgba(221, 221, 221, 0) 0%,rgba(221, 221, 221, 1) 13%);
+	border-bottom: solid 1px rgba(200, 200, 200, 1);
+	border-radius: 0 0 .2em .2em;
+	text-align: center;
+}
+
+.nodeCreate{
+	margin:0 auto;
+	text-align: center;
+	font-weight: bold;
+	width: 70%;
+	background: linear-gradient(180deg, rgba(221, 221, 221, 0) 0%, rgba(221, 221, 221, 1) 13%, rgba(177, 200, 167, 1) 75%, rgba(146, 187, 137, 1));
+	border-bottom: solid 1px rgba(200, 200, 200, 1);
+	border-top: solid 1px rgba(200, 200, 200, 1);
+	border-radius: 0 0 .2em .2em;
+	border-top: none;
+	color: rgb(241, 244, 204);
 }
 
 
