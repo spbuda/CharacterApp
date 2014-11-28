@@ -30,6 +30,7 @@
 		
         <script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="/js/plugins/jquery.js"></script>
+		<script type="text/javascript" src="/js/plugins/jquery.simplemodal.js"></script>
 		<script type="text/javascript" src="/js/plugins/jquery-ui/jquery-ui.js"></script>
 		
 		<!-- jsPlumb init -->
@@ -98,11 +99,31 @@
 							<div class="nodeCreate">&nbsp;</div>
 						</div>
 					</div>
+					<div id="element2" class="node">
+						<div class="nodeText">Test</div>
+						<div class="nodeButtons">
+							<div class="nodeNumber highlight">3</div>
+							<div class="nodeEdit highlight"><i class="fa fa-pencil-square-o"></i></div>
+							<div class="nodeCreate">&nbsp;</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div id="map" class="tab" style="display:none">
 				<img src="/img/mappityMap.jpg" class="map" ></img>
 			</div>
 		</div>
+		
+		
+		<!-- Modals -->
+		<div id="editNodeTextModal" class="modal">
+			<textarea style="width:20em;height:10em"></textarea>
+		</div>
+		
+		<div id="editNodeNumberModal" class="modal">
+			<input type="text" style="width:20em;"></textarea>
+		</div>
+		
+		
     </body>
 </html>
