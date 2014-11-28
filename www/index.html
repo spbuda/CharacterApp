@@ -90,29 +90,28 @@
 				<img src="/img/frown.jpg" style="width:50%"></img>
 			</div>
 			<div id="skills" class="tab" style="display:none">
-				<div class="plumb" id="plumb">
-					<div id="element1" class="node">
-						<div class="nodeText">Test</div>
-						<div class="nodeButtons">
-							<div class="nodeNumber highlight">3</div>
-							<div class="nodeEdit highlight"><i class="fa fa-pencil-square-o"></i></div>
-							<div class="nodeCreate">&nbsp;</div>
-						</div>
-					</div>
-					<div id="element2" class="node">
-						<div class="nodeText">Test</div>
-						<div class="nodeButtons">
-							<div class="nodeNumber highlight">3</div>
-							<div class="nodeEdit highlight"><i class="fa fa-pencil-square-o"></i></div>
-							<div class="nodeCreate">&nbsp;</div>
-						</div>
-					</div>
+				<div class="stickied">
+					<span id="addNode" class="btn"><i class="fa fa-plus-square-o"></i></span>
+					<span id="deleteNode" class="btn"><i class="fa fa-trash"></i></span>
 				</div>
+				<div class="plumb content" id="plumb"></div>
 			</div>
 			<div id="map" class="tab" style="display:none">
 				<img src="/img/mappityMap.jpg" class="map" ></img>
 			</div>
 		</div>
+		
+		<!-- Templates -->
+		<template id="nodeTemplate">
+			<div class="node">
+				<div class="nodeText"></div>
+				<div class="nodeButtons">
+					<div class="nodeNumber" onclick="editNumber(this);"></div>
+					<div class="nodeEdit" onclick="editText(this);"><i class="fa fa-pencil-square-o"></i></div>
+					<div class="nodeCreate"></div>
+				</div>
+			</div>
+		</template>
 		
 		
 		<!-- Modals -->
