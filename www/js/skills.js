@@ -44,6 +44,10 @@ $(document).ready(function(){
 		});
 		
 		var outOfBounds = function(){
+			var that = this;
+			setTimeout(function(){
+				instance.repaintEverything();
+			},800);
 			if($(this).position().top < $("#mainBanner").height())
 				return true;
 			else if($(this).position().left < $("#plumb").offset().left)
