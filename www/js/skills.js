@@ -48,8 +48,6 @@ $(document).ready(function(){
 				return true;
 			else if($(this).position().left < $("#plumb").offset().left)
 				return true;
-			else if($(this).position().left < ($("#plumb").offset().left + $("#plumb").width()))
-				return true;
 			else
 				return false;
 				
