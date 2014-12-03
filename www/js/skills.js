@@ -42,9 +42,22 @@ $(document).ready(function(){
 			if (typeof console !== "undefined")
 				console.log("connection", i.connection); 
 		});
+		
+		var outOfBounds = function(){
+			if($(this).position().top < $("#mainBanner").height())
+				return true;
+			else if($(this).position().left < $("#plumb").offset().left)
+				return true;
+			else if($(this).position().left < ($("#plumb").offset().left + $("#plumb").width()))
+				return true;
+			else
+				return false;
+				
+			
+		}
 
 		// make them draggable
-		instance.draggable($(node));
+		instance.draggable($(node), {revert:outOfBounds});
 
 		// suspend drawing and initialise.
 		instance.doWhileSuspended(function() {
