@@ -54,12 +54,21 @@
         <script src="/js/plugins/jsPlumb/src/base-library-adapter.js"></script>
         <script src="/js/plugins/jsPlumb/src/jquery.jsPlumb.js"></script>
 		
+		<!-- angular init -->
+		<script src="/js/plugins/angular/angular.js"></script>
+		<script src="/js/angular/characterApp.js"></script>
+		<script src="/js/angular/controllers/bioController.js"></script>
+		<script src="/js/angular/controllers/itemController.js"></script>
+		<script src="/js/angular/controllers/mapController.js"></script>
+		<script src="/js/angular/controllers/skillController.js"></script>
+		<script src="/js/angular/controllers/traitController.js"></script>
+		
 		<!-- page scripts -->
         <script type="text/javascript" src="/js/skills.js"></script>
 		
         <title>Index</title>
     </head>
-    <body>
+    <body ng-app="characterApp">
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$(".banner .buttons a.btn").on("click", function(){
@@ -80,23 +89,23 @@
 			</div>
 		</div>
 		<div id="tabs">
-			<div id="traits" class="tab" style="display:none">
+			<div id="traits" class="tab" ng-controller="traitController" style="display:none">
 				<img src="/img/Espy.png" style="width:50%"></img>
 			</div>
-			<div id="bio" class="tab" style="display:none">
+			<div id="bio" class="tab" ng-controller="bioController" style="display:none">
 				<img src="/img/Salter.gif" style="width:50%"></img>
 			</div>
-			<div id="items" class="tab" style="display:none">
+			<div id="items" class="tab" ng-controller="itemController" style="display:none">
 				<img src="/img/frown.jpg" style="width:50%"></img>
 			</div>
-			<div id="skills" class="tab" style="display:none">
+			<div id="skills" class="tab" ng-controller="skillController" style="display:none">
 				<div class="stickied">
 					<span id="addNode" class="btn"><i class="fa fa-plus-square-o"></i></span>
 					<span id="deleteNode" class="btn"><i class="fa fa-trash"></i></span>
 				</div>
 				<div class="plumb content" id="plumb"></div>
 			</div>
-			<div id="map" class="tab" style="display:none">
+			<div id="map" class="tab" ng-controller="mapController" style="display:none">
 				<img src="/img/mappityMap.jpg" class="map" ></img>
 			</div>
 		</div>

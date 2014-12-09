@@ -21,7 +21,6 @@ function toggleDelete(){
 
 function removeNode(){
 	var el = this;
-	jsPlumb.detachAllConnections(el.id);
 	$(el).remove();
 	disableDelete();
 };
