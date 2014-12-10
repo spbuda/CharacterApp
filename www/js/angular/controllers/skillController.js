@@ -4,7 +4,7 @@ angular.module('skillApp').controller('skillController', ['$scope', function($sc
 		{	id:0,
 			skill:"Test",
 			rolls:[3,4],
-			position:[100, 100],
+			position:{x:100, y:100},
 			connections:[]
 		}
     ];
