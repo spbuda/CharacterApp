@@ -100,10 +100,19 @@
 			</div>
 			<div id="skills" class="tab" ng-controller="skillController" style="display:none">
 				<div class="stickied">
-					<span id="addNode" class="btn"><i class="fa fa-plus-square-o"></i></span>
-					<span id="deleteNode" class="btn"><i class="fa fa-trash"></i></span>
+					<span id="addNode" class="btn" ng-click="addSkill()"><i class="fa fa-plus-square-o"></i></span>
+					<span id="deleteNode" class="btn" ng-click="deleteMode = !deleteMode"><i class="fa fa-trash"></i></span>
 				</div>
-				<div class="plumb content" id="plumb"></div>
+				<div class="plumb content" id="plumb">
+					<div ng-plumb ng-repeat="skill in skills" class="node" id="skill_{{skill.id}}" ng-class="(deleteMode === true)?'delete':''" style="left:{{skill.position.x}}px; top:{{skill.position.y}}px">
+						<div class="nodeText">{{skill.skill}}</div>
+						<div class="nodeButtons">
+							<div class="nodeNumber" onclick="editNumber(this);"><div ng-repeat="roll in skill.rolls">{{roll}}</div></div>
+							<div class="nodeEdit" onclick="editText(this);"><i class="fa fa-pencil-square-o"></i></div>
+							<div class="nodeCreate" ng-class="(deleteMode === true)?'delete':''"></div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div id="map" class="tab" ng-controller="mapController" style="display:none">
 				<img src="/img/mappityMap.jpg" class="map" ></img>
@@ -112,12 +121,12 @@
 		
 		<!-- Templates -->
 		<template id="nodeTemplate">
-			<div class="node">
+			<div class="node" ng-class="(deleteMode === true)?{delete}">
 				<div class="nodeText"></div>
 				<div class="nodeButtons">
 					<div class="nodeNumber" onclick="editNumber(this);"></div>
 					<div class="nodeEdit" onclick="editText(this);"><i class="fa fa-pencil-square-o"></i></div>
-					<div class="nodeCreate"></div>
+					<div class="nodeCreate" ng-class="{delete:$deleteMode === true}"></div>
 				</div>
 			</div>
 		</template>

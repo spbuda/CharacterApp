@@ -1,6 +1,6 @@
 var instance
 
-function disableDelete(){
+/* function disableDelete(){
 	$(".node, #deleteNode").removeClass("delete");
 	$(".nodeEdit i").removeClass("fa-trash");
 	$("#addNode").show();
@@ -17,20 +17,20 @@ function toggleDelete(){
 		disableDelete();
 	else
 		enableDelete();
-}
+} */
 
-function removeNode(){
+/* function removeNode(){
 	var el = this;
 	$(el).remove();
 	disableDelete();
-};
+}; */
 
 $(document).ready(function(){
-	$("#deleteNode").on("click",toggleDelete);
+	/* $("#deleteNode").on("click",toggleDelete); */
 	
-	$("#plumb").on("click",".delete",removeNode);
+	/* $("#plumb").on("click",".delete",removeNode); */
 
-	$("#addNode").on("click",function(){
+	/* $("#addNode").on("click",function(){
 		var t = $('#nodeTemplate')[0];
 
 		var clone = document.importNode(t.content, true);
@@ -83,8 +83,8 @@ $(document).ready(function(){
 			});
 		});
 
-		jsPlumb.fire("nodeCreated", instance)
-	}); 
+		jsPlumb.fire("nodeCreated", instance);
+	});  */
 });
 
 function editNumber(element){
