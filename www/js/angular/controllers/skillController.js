@@ -1,4 +1,4 @@
-angular.module('skillApp').controller('skillController', ['$scope', 'plumbService', function($scope, plumbService) {
+angular.module('skillApp').controller('skillController', ['$scope', function($scope) {
 	/* var initialized = false; */
 	function getSkillId(){
 		var id = skill_id;
@@ -20,31 +20,49 @@ angular.module('skillApp').controller('skillController', ['$scope', 'plumbServic
 		return {x:50, y:75};
 	}
 	
-	/* $scope.plumbService = plumbService; */
+	$scope.checkRemove = function(item){
+		if($scope.deleteMode === true){
+			remove(item);
+			$scope.deleteMode = false;
+		}
+	}
+	
+	function remove(item){
+		$scope.skills.splice(item.skill.id,1);
+	}
 	
 	$scope.addSkill = function(){
 		$scope.skills.push(newSkill());
 	}
 	
+	$scope.editNumber = function(element){
+		if($scope.deleteMode !== true){
+			$("#editNodeNumberModal").modal({overlayClose:true, onShow:function(){
+				$("#editNodeNumberModal input").val(element.skill.rolls.toString());
+			}, onClose:function(){
+				var arr = $("#editNodeNumberModal input").val().split(/\D+/g);
+				element.skill.rolls = arr;
+				$scope.$digest();
+				$.modal.close();
+			}});
+		}
+	}
+
+	$scope.editText = function(element){
+		if(($scope.deleteMode !== true)){
+			$("#editNodeTextModal").modal({overlayClose:true, onShow:function(){
+				$("#editNodeTextModal textarea").val(element.skill.skill);
+				$.modal();
+			}, onClose:function(){
+				element.skill.skill = $("#editNodeTextModal textarea").val();
+				$scope.$digest();
+				$.modal.close();
+			}});
+		}
+	};
+	
 	var skill_id = 0;
 	$scope.deleteMode = false;
-	
-	/* $scope.$watch(function(scope) {return scope.skills}, function(newValue, oldValue){
-		var newArr = [];
-		for(var i=0; i<newValue.length; i++){
-			if(!initialized){
-				var isIn = false;
-				for(var j=0; j<oldValue.length; j++){
-					if(newValue[i].id == oldValue[j].id){
-						isIn = true;
-					}
-				}
-			}
-			newArr.push($("#skill_"+newValue[i].id));
-		}
-		plumbService.addElements(newArr);
-		initialized = true;
-	}); */
 	
 	$scope.skills = [];
 	

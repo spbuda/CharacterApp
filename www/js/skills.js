@@ -1,4 +1,4 @@
-var instance
+/* var instance */
 
 /* function disableDelete(){
 	$(".node, #deleteNode").removeClass("delete");
@@ -87,7 +87,7 @@ $(document).ready(function(){
 	});  */
 });
 
-function editNumber(element){
+/* function editNumber(element){
 	if(!$(element).hasClass("delete")){
 		var nodeNumber = $(element).closest(".node").find(".nodeNumber");
 		$("#editNodeNumberModal").modal({overlayClose:true, onClose:function(){
@@ -99,9 +99,9 @@ function editNumber(element){
 			$("#editNodeNumberModal input").val(str);
 		}});
 	}
-}
+} */
 
-function editText(element){
+/* function editText(element){
 	if(!$(element).hasClass("delete")){
 		var nodeText = $(element).closest(".node").find(".nodeText");
 		$("#editNodeTextModal").modal({overlayClose:true, onClose:function(){
@@ -112,9 +112,9 @@ function editText(element){
 			$.modal();
 		}});
 	}
-};
+}; */
 
-jsPlumb.ready(function() {
+/* jsPlumb.ready(function() {
 // list of possible anchor locations for the blue source element
 	var sourceAnchors = [
 		[ 0.05, 1, 0, 1 ],
@@ -182,4 +182,4 @@ jsPlumb.ready(function() {
 	});
 
 	jsPlumb.fire("jsPlumbInitialized", instance);
-});
+}); */

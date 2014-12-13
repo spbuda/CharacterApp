@@ -64,7 +64,7 @@
 		<script src="/js/angular/controllers/traitController.js"></script>
 		
 		<!-- page scripts -->
-        <script type="text/javascript" src="/js/skills.js"></script>
+        <!-- <script type="text/javascript" src="/js/skills.js"></script> -->
 		
         <title>Index</title>
     </head>
@@ -104,12 +104,12 @@
 					<span id="deleteNode" class="btn" ng-click="deleteMode = !deleteMode"><i class="fa fa-trash"></i></span>
 				</div>
 				<div class="plumb content" id="plumb">
-					<div ng-plumb ng-repeat="skill in skills" class="node" id="skill_{{skill.id}}" ng-class="(deleteMode === true)?'delete':''" style="left:{{skill.position.x}}px; top:{{skill.position.y}}px">
+					<div ng-plumb ng-repeat="skill in skills" class="node" id="skill_{{skill.id}}" ng-class="(deleteMode === true)?'delete':''" ng-click="checkRemove(this)" style="left:{{skill.position.x}}px; top:{{skill.position.y}}px">
 						<div class="nodeText">{{skill.skill}}</div>
 						<div class="nodeButtons">
-							<div class="nodeNumber" onclick="editNumber(this);"><div ng-repeat="roll in skill.rolls">{{roll}}</div></div>
-							<div class="nodeEdit" onclick="editText(this);"><i class="fa fa-pencil-square-o"></i></div>
-							<div class="nodeCreate" ng-class="(deleteMode === true)?'delete':''"></div>
+							<div class="nodeNumber" ng-click="editNumber(this)"><div ng-repeat="roll in skill.rolls">{{roll}}</div></div>
+							<div class="nodeEdit" ng-click="editText(this)"><i class="fa" ng-class="(deleteMode === true)?'fa-trash':'fa-pencil-square-o'"></i></div>
+							<div class="nodeCreate"></div>
 						</div>
 					</div>
 				</div>
