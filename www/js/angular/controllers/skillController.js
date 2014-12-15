@@ -1,4 +1,4 @@
-angular.module('skillApp').controller('skillController', ['$scope', function($scope) {
+angular.module('characterApp').constant('modelName','skill').controller('skillController', ['$scope', 'DataService', 'modelName', function($scope, DataService, modelName) {
 	/* var initialized = false; */
 	function getSkillId(){
 		var id = skill_id;
@@ -64,7 +64,15 @@ angular.module('skillApp').controller('skillController', ['$scope', function($sc
 	var skill_id = 0;
 	$scope.deleteMode = false;
 	
-	$scope.skills = [];
+	function initializeController(obj){
+		if(obj){
+			$scope.skills = obj.skills;
+			skill_id = obj.skill_id;
+		}
+	}
+	
+	//TODO: get data after initialization.
+	initializeController(DataService.getControllerObject(modelName));
 	
 	function getTestSkill(){
 		return {
@@ -75,5 +83,5 @@ angular.module('skillApp').controller('skillController', ['$scope', function($sc
 			connections:[]
 		};
 	};
-	$scope.skills.push(getTestSkill());
+	/* $scope.skills.push(getTestSkill()); */
 }]);

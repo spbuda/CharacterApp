@@ -57,6 +57,7 @@ textarea{
 	text-align: center;
 	cursor: pointer;
 	-moz-user-select: none;
+	text-decoration: none;
 }
 
 .stickied{

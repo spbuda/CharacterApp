@@ -1,3 +1,3 @@
-angular.module('traitApp').controller('traitController', ['$scope', function($scope) {
+angular.module('characterApp').constant('modelName','trait').controller('traitController', ['$scope', 'DataService', function($scope, DataService) {
 
 }]);

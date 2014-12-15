@@ -1,3 +1,3 @@
-angular.module('itemApp').controller('itemController', ['$scope', function($scope) {
+angular.module('characterApp').constant('modelName','item').controller('itemController', ['$scope', 'DataService', function($scope, DataService) {
 
 }]);
