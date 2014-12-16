@@ -12,11 +12,11 @@ angular.module('characterApp').controller('CharacterController', ['$scope', '$in
 		}
 		$scope.character = characters[0];
 		console.log("DB Objects loaded.");
-		$interval(saveCharacters,1000); //Save objects every 10 seconds.
+		$interval(saveCharacters,10000); //Save objects every 10 seconds.
 	});
 	
 	function saveCharacters(){
-		DataService.save(characters);
+		DataService.save($scope.character);
 		console.log("DB Objects saved.");
 	}
 	
