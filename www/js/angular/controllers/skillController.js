@@ -1,4 +1,4 @@
-angular.module('characterApp').constant('modelName','skill').controller('skillController', ['$scope', 'DataService', 'modelName', function($scope, DataService, modelName) {
+angular.module('characterApp').constant('modelName','skill').controller('skillController', ['$scope', 'modelName', function($scope, modelName) {
 	/* var initialized = false; */
 	function getSkillId(){
 		var id = skill_id;
@@ -21,22 +21,22 @@ angular.module('characterApp').constant('modelName','skill').controller('skillCo
 	}
 	
 	$scope.checkRemove = function(item){
-		if($scope.deleteMode === true){
+		if($scope.deleteSkills === true){
 			remove(item);
-			$scope.deleteMode = false;
+			$scope.deleteSkills = false;
 		}
 	}
 	
 	function remove(item){
-		$scope.skills.splice(item.skill.id,1);
+		$scope.character.skills.splice(item.skill.id,1);
 	}
 	
 	$scope.addSkill = function(){
-		$scope.skills.push(newSkill());
+		$scope.character.skills.push(newSkill());
 	}
 	
 	$scope.editNumber = function(element){
-		if($scope.deleteMode !== true){
+		if($scope.deleteSkills !== true){
 			$("#editNodeNumberModal").modal({overlayClose:true, onShow:function(){
 				$("#editNodeNumberModal input").val(element.skill.rolls.toString());
 			}, onClose:function(){
@@ -62,17 +62,7 @@ angular.module('characterApp').constant('modelName','skill').controller('skillCo
 	};
 	
 	var skill_id = 0;
-	$scope.deleteMode = false;
-	
-	function initializeController(obj){
-		if(obj){
-			$scope.skills = obj.skills;
-			skill_id = obj.skill_id;
-		}
-	}
-	
-	//TODO: get data after initialization.
-	initializeController(DataService.getControllerObject(modelName));
+	$scope.deleteSkills = false;
 	
 	function getTestSkill(){
 		return {

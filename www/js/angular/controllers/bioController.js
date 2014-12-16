@@ -1,3 +1,3 @@
-angular.module('characterApp').constant('modelName','bio').controller('bioController', ['$scope', 'DataService', function($scope, DataService) {
+angular.module('characterApp').constant('modelName','bio').controller('bioController', ['$scope', function($scope) {
 
 }]);

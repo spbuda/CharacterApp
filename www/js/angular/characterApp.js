@@ -2,28 +2,16 @@ angular.module('characterApp',['ngRoute','xc.indexedDB'])
 .constant('dbName', 'character')
 .constant('storeName', 'character')
 .constant('version', 1)
-.constant('emptyCharacter', {})
+.constant('emptyCharacter', {guid:"",bio:{},items:[],map:{},skills:[],trait:{}})
 .value('jsPlumbInstance', {})
+.value('index',0)
 .config(function($indexedDBProvider, dbName, storeName, version) {
 	$indexedDBProvider.connection(dbName)
 	.upgradeDatabase(version, function(event, db, tx){
 		db.createObjectStore(storeName, {keyPath: 'guid'});
 	});
 })
-.config(function($routeProvider){
-	console.log('Configuring route');
-	$routeProvider
-	.when('/js/angular/controllers/characterController.js', {
-		controller:'characterController',
-		resolve:{
-			'characterData':function(DataService){
-				console.log('resolving promise');
-				return DataService.promise;
-			}
-		}
-	})
-})
-.service('DataService', ['$indexedDB', 'storeName', 'emptyCharacter', function($indexedDB, storeName, newObject){
+.service('DataService', ['$indexedDB', 'storeName', 'emptyCharacter', 'index', function($indexedDB, storeName, newObject){
 	function generateUUID(){
 		var d = performance.now();
 		var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -34,39 +22,22 @@ angular.module('characterApp',['ngRoute','xc.indexedDB'])
 		return uuid;
 	};
 	
-	var objects = [];
-	var index = 0;
-	
 	var objectStore = $indexedDB.objectStore(storeName);
-	var promise = objectStore.getAll().then(function(results) {
-		if(results != null && results.length > 0){
-			objects = results;
-		}
-		else{
-			newObject['guid'] = generateUUID();
-			objects = [newObject];
-			saveObjects();
-		}
-		console.log("DB Objects loaded.");
-	});
+	var promise = objectStore.getAll();
 	console.log("Promise created");
 	
-	function saveObjects(){
+	function saveObjects(objects){
 		objectStore.insert(objects);
 	};
-	
-	function setObjectIndex(i){
-		index = i;
-	}
 	
 	function getControllerObject(propertyName){
 		return objects;
 	}
 	
 	return {
-		getControllerObject : getControllerObject,
-		setObjectIndex : setObjectIndex,
+		generateUUID : generateUUID,
 		promise : promise,
+		newObject : function(){return newObject;},
 		save : saveObjects
 	};
 }])

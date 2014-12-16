@@ -93,11 +93,34 @@
 			</div>
 		</div>
 		<div id="tabs">
-			<ssp:html>{"src":"/page/bio.html"}</ssp:html>
-			<ssp:html>{"src":"/page/items.html"}</ssp:html>
-			<ssp:html>{"src":"/page/traits.html"}</ssp:html>
-			<ssp:html>{"src":"/page/map.html"}</ssp:html>
-			<ssp:html>{"src":"/page/skills.html"}</ssp:html>
+			<div id="bio view-animate" class="tab" ng-controller="bioController" style="display:none">
+				<img src="/img/Salter.gif" style="width:50%"></img>
+			</div>
+			<div id="items" class="tab view-animate" ng-controller="itemController" style="display:none">
+				<img src="/img/frown.jpg" style="width:50%"></img>
+			</div>
+			<div id="map" class="tab view-animate" ng-controller="mapController" style="display:none">
+				<img src="/img/mappityMap.jpg" class="map" ></img>
+			</div>
+			<div id="skills" class="tab view-animate" ng-controller="skillController" style="display:none">
+				<div class="stickied">
+					<span id="addNode" class="btn" ng-click="addSkill()"><i class="fa fa-plus-square-o"></i></span>
+					<span id="deleteNode" class="btn" ng-click="deleteSkills = !deleteSkills"><i class="fa fa-trash"></i></span>
+				</div>
+				<div class="plumb content" id="plumb">
+					<div ng-plumb ng-repeat="skill in skills" class="node" id="skill_{{skill.id}}" ng-class="(deleteSkills === true)?'delete':''" ng-click="checkRemove(this)" style="left:{{skill.position.x}}px; top:{{skill.position.y}}px">
+						<div class="nodeText">{{skill.skill}}</div>
+						<div class="nodeButtons">
+							<div class="nodeNumber" ng-click="editNumber(this)"><div ng-repeat="roll in skill.rolls">{{roll}}</div></div>
+							<div class="nodeEdit" ng-click="editText(this)"><i class="fa" ng-class="(deleteSkills === true)?'fa-trash':'fa-pencil-square-o'"></i></div>
+							<div class="nodeCreate"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="traits" class="tab view-animate" ng-controller="traitController" style="display:none">
+				<img src="/img/Espy.png" style="width:50%"></img>
+			</div>
 		</div>
 		
 		<!-- Modals -->
