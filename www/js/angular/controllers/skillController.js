@@ -1,8 +1,7 @@
-angular.module('characterApp').constant('modelName','skill').controller('skillController', ['$scope', 'modelName', function($scope, modelName) {
-	/* var initialized = false; */
+angular.module('characterApp').controller('SkillController', ['$scope', function($scope) {	
 	function getSkillId(){
-		var id = skill_id;
-		skill_id ++;
+		var id = $scope.character.skill.skill_id;
+		$scope.character.skill.skill_id ++;
 		return id;
 	}
 	
@@ -28,11 +27,11 @@ angular.module('characterApp').constant('modelName','skill').controller('skillCo
 	}
 	
 	function remove(item){
-		$scope.character.skills.splice(item.skill.id,1);
+		$scope.character.skill.skills.splice(item.skill.id,1);
 	}
 	
 	$scope.addSkill = function(){
-		$scope.character.skills.push(newSkill());
+		$scope.character.skill.skills.push(newSkill());
 	}
 	
 	$scope.editNumber = function(element){
@@ -61,7 +60,6 @@ angular.module('characterApp').constant('modelName','skill').controller('skillCo
 		}
 	};
 	
-	var skill_id = 0;
 	$scope.deleteSkills = false;
 	
 	function getTestSkill(){

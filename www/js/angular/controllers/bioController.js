@@ -1,3 +1,3 @@
-angular.module('characterApp').constant('modelName','bio').controller('bioController', ['$scope', function($scope) {
+angular.module('characterApp').controller('BioController', ['$scope', function($scope) {
 
 }]);

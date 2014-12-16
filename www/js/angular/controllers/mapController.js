@@ -1,3 +1,3 @@
-angular.module('characterApp').constant('modelName','map').controller('mapController', ['$scope', function($scope) {
+angular.module('characterApp').controller('MapController', ['$scope', function($scope) {
 
 }]);

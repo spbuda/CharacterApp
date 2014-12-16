@@ -1,17 +1,16 @@
-angular.module('characterApp',['ngRoute','xc.indexedDB'])
+angular.module('characterApp',['xc.indexedDB'])
 .constant('dbName', 'character')
 .constant('storeName', 'character')
 .constant('version', 1)
-.constant('emptyCharacter', {guid:"",bio:{},items:[],map:{},skills:[],trait:{}})
+.constant('emptyCharacter', {guid:"",bio:{},item:{items:[]},map:{},skill:{skill_id:0,skills:[]},trait:{}})
 .value('jsPlumbInstance', {})
-.value('index',0)
 .config(function($indexedDBProvider, dbName, storeName, version) {
 	$indexedDBProvider.connection(dbName)
 	.upgradeDatabase(version, function(event, db, tx){
 		db.createObjectStore(storeName, {keyPath: 'guid'});
 	});
 })
-.service('DataService', ['$indexedDB', 'storeName', 'emptyCharacter', 'index', function($indexedDB, storeName, newObject){
+.service('DataService', ['$indexedDB', 'storeName', 'emptyCharacter', function($indexedDB, storeName, newObject){
 	function generateUUID(){
 		var d = performance.now();
 		var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -41,32 +40,33 @@ angular.module('characterApp',['ngRoute','xc.indexedDB'])
 		save : saveObjects
 	};
 }])
-.directive('ngPlumbArea', ['jsPlumbInstance', function(instance) {
-	// list of possible anchor locations for the blue source element
-	var sourceAnchors = [[ 0.05, 1, 0, 1 ],[ 0.27, 1, 0, 1 ],[ 0.5, 1, 0, 1 ],[ 0.73, 1, 0, 1 ],[ 0.95, 1, 0, 1 ]];
-	var connectionAnchors = [[ 0.00, 0.75, 0, 0 ],[ 0.00, 0, 0, 0 ],[ 0.25, 0, 0, 0 ],[ 0.5, 0, 0, 0 ],[ 0.75, 0, 0, 0 ],[ 1, 0, 0, 0 ],[ 1, 0.75, 0, 0 ]];
-	
-	instance = window.instance = jsPlumb.getInstance({
-		Anchors : [ sourceAnchors, connectionAnchors ],
-		/* DragOptions : { cursor: "pointer", zIndex:2000 }, */
-		EndpointStyles : [{ fillStyle:"rgba(107, 164, 94, 1)" }, { fillStyle:"rgba(221, 221, 221, 1)" }],
-		Endpoints : [ ["Dot", { radius:6 } ], [ "Dot", { radius:6 } ] ],
-		PaintStyle : {strokeStyle:"rgba(107, 164, 94, 1)",lineWidth:3},
-		Container:"plumb"
-	});
+.directive('ngPlumbArea', ['$rootScope', function(app) {
+	function link (scope,element,attrs) {
+		// list of possible anchor locations for the blue source element
+		var sourceAnchors = [[ 0.05, 1, 0, 1 ],[ 0.27, 1, 0, 1 ],[ 0.5, 1, 0, 1 ],[ 0.73, 1, 0, 1 ],[ 0.95, 1, 0, 1 ]];
+		var connectionAnchors = [[ 0.00, 0.75, 0, 0 ],[ 0.00, 0, 0, 0 ],[ 0.25, 0, 0, 0 ],[ 0.5, 0, 0, 0 ],[ 0.75, 0, 0, 0 ],[ 1, 0, 0, 0 ],[ 1, 0.75, 0, 0 ]];
+		
+		app.jsPlumbInstance = window.instance = jsPlumb.getInstance({
+			Anchors : [ sourceAnchors, connectionAnchors ],
+			/* DragOptions : { cursor: "pointer", zIndex:2000 }, */
+			EndpointStyles : [{ fillStyle:"rgba(107, 164, 94, 1)" }, { fillStyle:"rgba(221, 221, 221, 1)" }],
+			Endpoints : [ ["Dot", { radius:6 } ], [ "Dot", { radius:6 } ] ],
+			PaintStyle : {strokeStyle:"rgba(107, 164, 94, 1)",lineWidth:3},
+			Container:"plumb"
+		});
 
-	jsPlumb.fire("jsPlumbInitialized", instance);
-
+		jsPlumb.fire("jsPlumbInitialized", app.jsPlumbInstance);
+	}
+	return {
+		link:link
+	};
 }])
-.directive('ngPlumb', ['jsPlumbInstance', function(instance) {
-	jsPlumb.ready(function() {
-	});
-
+.directive('ngPlumb', ['$rootScope', function(app) {
 	function link (scope,element,attrs) {
 		var node = $(element)[0];
 		
-		instance.bind("connection", function(i,c) { 
-			node
+		app.jsPlumbInstance.bind("connection", function(i,c) { 
+			console.log("made connection");
 		});
 		
 		var outOfBounds = function(){
@@ -79,12 +79,12 @@ angular.module('characterApp',['ngRoute','xc.indexedDB'])
 		}
 
 		// make them draggable
-		instance.draggable($(node), {revert:outOfBounds, drag:instance.repaintEverything, stop: instance.repaintEverything});
+		app.jsPlumbInstance.draggable($(node), {revert:outOfBounds, drag:app.jsPlumbInstance.repaintEverything, stop: app.jsPlumbInstance.repaintEverything});
 
 		// suspend drawing and initialise.
-		instance.doWhileSuspended(function() {
+		app.jsPlumbInstance.doWhileSuspended(function() {
 
-			instance.makeSource($(node).find(".nodeCreate"), {					
+			app.jsPlumbInstance.makeSource($(node).find(".nodeCreate"), {					
 				filter:function(evt, el) {
 					var t = evt.target || evt.srcElement;
 					return t.tagName !== "A";
@@ -93,13 +93,13 @@ angular.module('characterApp',['ngRoute','xc.indexedDB'])
 				maxConnections:-1
 			});			
 			
-			instance.makeTarget($(node).find(".nodeText"), {				
+			app.jsPlumbInstance.makeTarget($(node).find(".nodeText"), {				
 				dropOptions:{ hoverClass:"hover" },
 				uniqueEndpoint:false
 			});
 		});
 
-		jsPlumb.fire("nodeCreated", instance);
+		jsPlumb.fire("nodeCreated", app.jsPlumbInstance);
 	}
 	
 	return {

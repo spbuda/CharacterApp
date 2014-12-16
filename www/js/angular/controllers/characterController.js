@@ -1,4 +1,4 @@
-angular.module('characterApp').controller('characterController', ['$scope', '$interval', 'DataService', function($scope, $interval, DataService) {
+angular.module('characterApp').controller('CharacterController', ['$scope', '$interval', 'DataService', function($scope, $interval, DataService) {
 	var characters = [];
 	DataService.promise.then(function(results){
 		if(results != null && results.length > 0){
@@ -12,11 +12,12 @@ angular.module('characterApp').controller('characterController', ['$scope', '$in
 		}
 		$scope.character = characters[0];
 		console.log("DB Objects loaded.");
-		//TODO: $interval(saveCharacters,30000);
+		$interval(saveCharacters,1000); //Save objects every 10 seconds.
 	});
 	
 	function saveCharacters(){
 		DataService.save(characters);
+		console.log("DB Objects saved.");
 	}
 	
 	function changeCharacter(index) {
