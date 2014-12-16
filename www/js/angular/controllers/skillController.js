@@ -5,18 +5,16 @@ angular.module('characterApp').controller('SkillController', ['$scope', function
 		return id;
 	}
 	
-	function newSkill(){
-		return skill = {
-			id: getSkillId(),
-			skill: "",
-			rolls: [],
-			position: defaultPosition(),
-			connections: []
-		};
+	function exists(obj){
+		return (typeof(obj)!=='undefined' && obj!==null);
 	}
 	
-	function defaultPosition(){
-		return {x:50, y:75};
+	function Skill(skill, rolls, position, connections){
+		this.id = getSkillId();
+		this.skill = exists(skill) ? skill : "";
+		this.rolls = exists(rolls) ? rolls : [];
+		this.position = exists(position) ? position : {left:50, top:75};
+		this.connections = exists(connections) ? connections : [];
 	}
 	
 	$scope.checkRemove = function(item){
@@ -31,13 +29,14 @@ angular.module('characterApp').controller('SkillController', ['$scope', function
 	}
 	
 	$scope.addSkill = function(){
-		$scope.character.skill.skills.push(newSkill());
+		$scope.character.skill.skills.push(new Skill());
 	}
 	
 	$scope.editNumber = function(element){
 		if($scope.deleteSkills !== true){
 			$("#editNodeNumberModal").modal({overlayClose:true, onShow:function(){
-				$("#editNodeNumberModal input").val(element.skill.rolls.toString());
+				if(element.skill.rolls !== null)
+					$("#editNodeNumberModal input").val(element.skill.rolls.toString());
 			}, onClose:function(){
 				var arr = $("#editNodeNumberModal input").val().split(/\D+/g);
 				element.skill.rolls = arr;
@@ -61,15 +60,4 @@ angular.module('characterApp').controller('SkillController', ['$scope', function
 	};
 	
 	$scope.deleteSkills = false;
-	
-	function getTestSkill(){
-		return {
-			id:getSkillId(),
-			skill:"Test",
-			rolls:[3,4],
-			position: defaultPosition(),
-			connections:[]
-		};
-	};
-	/* $scope.skills.push(getTestSkill()); */
 }]);

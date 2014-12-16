@@ -26,7 +26,7 @@ angular.module('characterApp',['xc.indexedDB'])
 	console.log("Promise created");
 	
 	function saveObjects(objects){
-		objectStore.insert(objects);
+		objectStore.upsert(objects);
 	};
 	
 	function getControllerObject(propertyName){
@@ -65,9 +65,31 @@ angular.module('characterApp',['xc.indexedDB'])
 	function link (scope,element,attrs) {
 		var node = $(element)[0];
 		
-		app.jsPlumbInstance.bind("connection", function(i,c) { 
+		app.jsPlumbInstance.bind("connection", function(i,c) {
+			var parent = $(i.source).closest(".node").scope();
+			var child = $(i.target).closest(".node").scope();
+			parent.skill.connections.push(child.skill.id);
+			parent.skill.connections = parent.skill.connections.filter(function(value, index, self){return self.indexOf(value) === index;});
 			console.log("made connection");
 		});
+		
+		app.jsPlumbInstance.bind("connectionDetached", function(i,c) {
+			var parent = $(i.source).closest(".node").scope();
+			var child = $(i.target).closest(".node").scope();
+			parent.skill.connections.splice(child.skill.id,1);
+			console.log("removed connection");
+		});
+		
+		function repaint(){
+			app.jsPlumbInstance.repaintEverything()
+		}
+		function update() {
+			pos = $(this).position();
+			if(scope.skill.position === null) scope.skill.position={};
+			scope.skill.position.left = pos.left;
+			scope.skill.position.top = pos.top;
+			repaint();
+		}
 		
 		var outOfBounds = function(){
 			if($(this).position().top < $("#mainBanner").height())
@@ -79,7 +101,7 @@ angular.module('characterApp',['xc.indexedDB'])
 		}
 
 		// make them draggable
-		app.jsPlumbInstance.draggable($(node), {revert:outOfBounds, drag:app.jsPlumbInstance.repaintEverything, stop: app.jsPlumbInstance.repaintEverything});
+		app.jsPlumbInstance.draggable($(node), {revert:outOfBounds, drag:repaint, stop:update});
 
 		// suspend drawing and initialise.
 		app.jsPlumbInstance.doWhileSuspended(function() {

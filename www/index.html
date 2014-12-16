@@ -108,7 +108,7 @@
 					<span id="deleteNode" class="btn" ng-click="deleteSkills = !deleteSkills"><i class="fa fa-trash"></i></span>
 				</div>
 				<div ng-plumb-area class="plumb content" id="plumb">
-					<div ng-plumb ng-repeat="skill in character.skill.skills" class="node" id="skill_{{skill.id}}" ng-class="(deleteSkills === true)?'delete':''" ng-click="checkRemove(this)" style="left:{{skill.position.x}}px; top:{{skill.position.y}}px">
+					<div ng-plumb ng-repeat="skill in character.skill.skills" class="node" id="skill_{{skill.id}}" ng-class="(deleteSkills === true)?'delete':''" ng-click="checkRemove(this)" style="left:{{skill.position.left}}px; top:{{skill.position.top}}px">
 						<div class="nodeText">{{skill.skill}}</div>
 						<div class="nodeButtons">
 							<div class="nodeNumber" ng-click="editNumber(this)"><div ng-repeat="roll in skill.rolls">{{roll}}</div></div>
