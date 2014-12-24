@@ -1,16 +1,25 @@
-<div id="skills" class="tab view-animate" ng-controller="skillController" style="display:none">
+<div id="skills" class="tab">
 	<div class="stickied">
 		<span id="addNode" class="btn" ng-click="addSkill()"><i class="fa fa-plus-square-o"></i></span>
-		<span id="deleteNode" class="btn" ng-click="deleteMode = !deleteMode"><i class="fa fa-trash"></i></span>
+		<span id="deleteNode" class="btn" ng-click="deleteSkills = !deleteSkills"><i class="fa fa-trash"></i></span>
 	</div>
-	<div class="plumb content" id="plumb">
-		<div ng-plumb ng-repeat="skill in skills" class="node" id="skill_{{skill.id}}" ng-class="(deleteMode === true)?'delete':''" ng-click="checkRemove(this)" style="left:{{skill.position.x}}px; top:{{skill.position.y}}px">
+	<div ng-plumb-area class="plumb content" id="plumb">
+		<div ng-plumb ng-repeat="skill in character.skill.skills track by $index" class="node" ng-class="(deleteSkills === true)?'delete':''" ng-click="checkRemove(this)" style="left:{{skill.position.left}}px; top:{{skill.position.top}}px">
 			<div class="nodeText">{{skill.skill}}</div>
 			<div class="nodeButtons">
 				<div class="nodeNumber" ng-click="editNumber(this)"><div ng-repeat="roll in skill.rolls">{{roll}}</div></div>
-				<div class="nodeEdit" ng-click="editText(this)"><i class="fa" ng-class="(deleteMode === true)?'fa-trash':'fa-pencil-square-o'"></i></div>
+				<div class="nodeEdit" ng-click="editText(this)"><i class="fa" ng-class="(deleteSkills === true)?'fa-trash':'fa-pencil-square-o'"></i></div>
 				<div class="nodeCreate"></div>
 			</div>
 		</div>
 	</div>
+</div>
+
+<!-- Modals -->
+<div id="editNodeTextModal" class="modal">
+	<textarea style="width:20em;height:10em"></textarea>
+</div>
+
+<div id="editNodeNumberModal" class="modal">
+	<input type="text" style="width:20em;"></textarea>
 </div>

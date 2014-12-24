@@ -24,11 +24,12 @@
         <meta name="msapplication-tap-highlight" content="no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-		<link rel="stylesheet" type="text/css" href="css/common.css" />
+        <link rel="stylesheet" type="text/css" href="/css/index.css" />
+		<link rel="stylesheet" type="text/css" href="/css/common.css" />
+		<link rel="stylesheet" type="text/css" href="/css/animations.css" />
 		<link rel="stylesheet" type="text/css" href="/css/font-awesome/css/font-awesome.min.css">
 		
-        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="/js/index.js"></script>
 		<script type="text/javascript" src="/js/plugins/jquery.js"></script>
 		<script type="text/javascript" src="/js/plugins/jquery.simplemodal.js"></script>
 		<script type="text/javascript" src="/js/plugins/jquery-ui/jquery-ui.js"></script>
@@ -57,8 +58,12 @@
 		<!-- angular init -->
 		<script src="/js/plugins/angular/angular.js"></script>
 		<script src="/js/plugins/angular/route.js"></script>
+		<script src="/js/plugins/angular/animate.js"></script>
 		<script src="/js/plugins/angular/indexeddb.js"></script>
 		<script src="/js/angular/characterApp.js"></script>
+		<script src="/js/angular/services/dataService.js"></script>
+		<script src="/js/angular/directives/ngPlumbArea.js"></script>
+		<script src="/js/angular/directives/ngPlumb.js"></script>
 		<script src="/js/angular/controllers/characterController.js"></script>
 		<script src="/js/angular/controllers/bioController.js"></script>
 		<script src="/js/angular/controllers/itemController.js"></script>
@@ -66,72 +71,22 @@
 		<script src="/js/angular/controllers/skillController.js"></script>
 		<script src="/js/angular/controllers/traitController.js"></script>
 		
-		<!-- page scripts -->
-        <!-- <script type="text/javascript" src="/js/skills.js"></script> -->
-		
         <title>Index</title>
+		<base href="/">
     </head>
     <body ng-app="characterApp" ng-controller="CharacterController">
-	<!--TODO: turn this into a directive.-->
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$(".banner .buttons a.btn").on("click", function(){
-					$(".banner .buttons a.btn").removeClass("highlight");
-					$(this).addClass("highlight");
-					$("#tabs .tab").hide();
-					$("#"+$(this).data("tab")).show();
-				});
-			});
-		</script>
 		<div id="mainBanner" class="banner">
 			<div class="buttons">
-				<a data-tab="traits" id="traits_btn" class="btn">Traits</a>
-				<a data-tab="bio" id="bio_btn" class="btn">Bio</a>
-				<a data-tab="items" id="items_btn" class="btn">Items</a>
-				<a data-tab="skills" id="skills_btn" class="btn">Skills</a>
-				<a data-tab="map" id="map_btn" class="btn">Map</a>
+				<a data-tab="traits" href="traits" id="traits_btn" class="btn">Traits</a>
+				<a data-tab="bio" href="bio" id="bio_btn" class="btn">Bio</a>
+				<a data-tab="items" href="items" id="items_btn" class="btn">Items</a>
+				<a data-tab="skills" href="skills" id="skills_btn" class="btn">Skills</a>
+				<a data-tab="map" href="map" id="map_btn" class="btn">Map</a>
 			</div>
 		</div>
-		<div id="tabs">
-			<div id="bio view-animate" class="tab" ng-controller="BioController" style="display:none">
-				<img src="/img/Salter.gif" style="width:50%"></img>
-			</div>
-			<div id="items" class="tab view-animate" ng-controller="ItemController" style="display:none">
-				<img src="/img/frown.jpg" style="width:50%"></img>
-			</div>
-			<div id="map" class="tab view-animate" ng-controller="MapController" style="display:none">
-				<img src="/img/mappityMap.jpg" class="map" ></img>
-			</div>
-			<div id="skills" class="tab view-animate" ng-controller="SkillController" style="display:none">
-				<div class="stickied">
-					<span id="addNode" class="btn" ng-click="addSkill()"><i class="fa fa-plus-square-o"></i></span>
-					<span id="deleteNode" class="btn" ng-click="deleteSkills = !deleteSkills"><i class="fa fa-trash"></i></span>
-				</div>
-				<div ng-plumb-area class="plumb content" id="plumb">
-					<div ng-plumb ng-repeat="skill in character.skill.skills" class="node" id="skill_{{skill.id}}" ng-class="(deleteSkills === true)?'delete':''" ng-click="checkRemove(this)" style="left:{{skill.position.left}}px; top:{{skill.position.top}}px">
-						<div class="nodeText">{{skill.skill}}</div>
-						<div class="nodeButtons">
-							<div class="nodeNumber" ng-click="editNumber(this)"><div ng-repeat="roll in skill.rolls">{{roll}}</div></div>
-							<div class="nodeEdit" ng-click="editText(this)"><i class="fa" ng-class="(deleteSkills === true)?'fa-trash':'fa-pencil-square-o'"></i></div>
-							<div class="nodeCreate"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="traits" class="tab view-animate" ng-controller="TraitController" style="display:none">
-				<img src="/img/Espy.png" style="width:50%"></img>
+		<div id="tabs"class="view-animate-container">
+			<div ng-view class="view-animate">
 			</div>
 		</div>
-		
-		<!-- Modals -->
-		<div id="editNodeTextModal" class="modal">
-			<textarea style="width:20em;height:10em"></textarea>
-		</div>
-		
-		<div id="editNodeNumberModal" class="modal">
-			<input type="text" style="width:20em;"></textarea>
-		</div>
-		
-		
     </body>
 </html>

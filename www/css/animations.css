@@ -1,19 +1,17 @@
 .view-animate-container {
   position:relative;
-  height:100px!important;
-  background:white;
-  border:1px solid black;
-  height:40px;
+  min-height:25em;
   overflow:hidden;
 }
 
 .view-animate {
   padding:10px;
+  height:auto;
 }
 
 .view-animate.ng-enter, .view-animate.ng-leave {
-  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
-  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) .25s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) .25s;
 
   display:block;
   width:100%;
