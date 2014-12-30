@@ -1,4 +1,6 @@
-angular.module('characterApp').controller('SkillController', ['$scope', 'PlumbService', function($scope, PlumbService) {	
+angular.module('characterApp').controller('SkillController', ['$scope', 'PlumbService', function($scope, PlumbService) {
+	//TODO: Undo
+	
 	function getSkillId(){
 		var id = $scope.character.skill.skill_id;
 		$scope.character.skill.skill_id ++;
