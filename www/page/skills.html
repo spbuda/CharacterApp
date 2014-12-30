@@ -1,6 +1,7 @@
 <div class="stickied">
 	<span id="addNode" class="btn" ng-click="addSkill()"><i class="fa fa-plus-square-o"></i></span>
 	<span id="deleteNode" class="btn" ng-click="deleteSkills = !deleteSkills"><i class="fa fa-trash"></i></span>
+	<span id="undo" class="btn" ng-click="undo()" ng-class="(undoBuffer.length < 1)?'delete':''"><i class="fa fa-undo"></i></span>
 </div>
 <div ng-plumb-area class="plumb content" id="plumb">
 	<div ng-plumb ng-repeat="skill in character.skill.skills track by $index" class="node" ng-class="(deleteSkills === true)?'delete':''" ng-click="checkRemove(this)" style="left:{{skill.position.left}}px; top:{{skill.position.top}}px">

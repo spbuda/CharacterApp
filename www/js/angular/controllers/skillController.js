@@ -21,15 +21,38 @@ angular.module('characterApp').controller('SkillController', ['$scope', 'PlumbSe
 	
 	$scope.checkRemove = function(item){
 		if($scope.deleteSkills === true){
-			remove(item);
+			removeWithUndo(item);
 			$scope.deleteSkills = false;
 		}
+	}
+
+	$scope.undoBuffer = [];
+	function setUndo(items){
+		$scope.undoBuffer = items.concat($scope.undoBuffer);
+	}
+	
+	function removeWithUndo(item){
+		setUndo(remove(item));
 	}
 	
 	function remove(item){
 		PlumbService.remove(item);
 		var index = $scope.character.skill.skills.indexOf(item.skill);
-		$scope.character.skill.skills.splice(index,1);
+		return $scope.character.skill.skills.splice(index,1);
+	}
+	
+	function undo(){
+		var undid = $scope.undoBuffer.shift();
+		if(undid != null){
+			$scope.character.skill.skills.push(undid);
+		}
+		else{
+			console.log("Nothing to undo");
+		}
+	}
+	
+	$scope.undo = function(){
+		undo();
 	}
 	
 	$scope.addSkill = function(){
