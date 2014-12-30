@@ -113,7 +113,7 @@ textarea{
 	min-width: 15em;
 }
 
-.node.delete > div.nodeText, .node.delete > div.nodeButtons > div{
+.node.delete > div.nodeText, .node.delete > div.nodeButtons > div, .disabled{
 	background: darkgray;
 	color: gray;
 }
