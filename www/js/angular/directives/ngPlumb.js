@@ -1,4 +1,4 @@
-angular.module('characterApp').directive('ngPlumb', ['$rootScope', 'sourceAnchors', 'connectionAnchors', function(app, sourceAnchors, connectionAnchors) {
+angular.module('characterApp').directive('ngPlumb', ['$rootScope', 'sourceAnchors', 'connectionAnchors', 'plumbConfig', function(app, sourceAnchors, connectionAnchors, opts) {
 	function link (scope,element,attrs) {
 		var node = $(element)[0];
 		node.id = "node_" + scope.skill.id;
@@ -34,8 +34,8 @@ angular.module('characterApp').directive('ngPlumb', ['$rootScope', 'sourceAnchor
 		function makeConnections(node, scope){
 			var el = $(node).find(".nodeCreate")[0].id;// + node.skill.id;
 			for(var i=0; i<scope.skill.connections.length; i++){
-				var targ = $("#node_" + scope.skill.connections[i] + " .nodeText")[0].id;// + node.skill.connections[i];
-				attemptConnect(el, targ,20);
+				var targ = $("#node_" + scope.skill.connections[i]).find(".nodeText")[0].id;// + node.skill.connections[i];
+				connect(el,targ);//,20);
 			}
 		}
 
@@ -50,11 +50,7 @@ angular.module('characterApp').directive('ngPlumb', ['$rootScope', 'sourceAnchor
 		}
 
 		function connect(el, targ){
-			jsPlumb.connect({source:el, target:targ,
-			endpointStyles : [{ fillStyle:"rgba(107, 164, 94, 1)" }, { fillStyle:"rgba(221, 221, 221, 1)" }],
-			endpoints : [ ["Dot", { radius:1, enabled:false } ], [ "Dot", { radius:6 } ] ],
-			anchors : [ sourceAnchors, connectionAnchors ],
-			paintStyle : {strokeStyle:"rgba(107, 164, 94, 1)", lineWidth:3}});
+			app.jsPlumbInstance.connect({source:el, target:targ});
 		}
 		
 		var outOfBounds = function(){
@@ -86,7 +82,7 @@ angular.module('characterApp').directive('ngPlumb', ['$rootScope', 'sourceAnchor
 				uniqueEndpoint:false
 			});
 
-			setTimeout(function(){makeConnections(node, scope);},100);
+			setTimeout(function(){makeConnections(node, scope);},0);
 		});
 
 		jsPlumb.fire("nodeCreated", app.jsPlumbInstance);
