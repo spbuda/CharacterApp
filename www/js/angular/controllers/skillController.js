@@ -1,4 +1,4 @@
-angular.module('characterApp').controller('SkillController', ['$scope', function($scope) {	
+angular.module('characterApp').controller('SkillController', ['$scope', 'PlumbService', function($scope, PlumbService) {	
 	function getSkillId(){
 		var id = $scope.character.skill.skill_id;
 		$scope.character.skill.skill_id ++;
@@ -25,6 +25,7 @@ angular.module('characterApp').controller('SkillController', ['$scope', function
 	}
 	
 	function remove(item){
+		PlumbService.remove(item);
 		var index = $scope.character.skill.skills.indexOf(item.skill);
 		$scope.character.skill.skills.splice(index,1);
 	}
