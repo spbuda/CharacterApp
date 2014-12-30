@@ -1,11 +1,19 @@
-angular.module('characterApp').directive('ngPlumb', ['$rootScope', 'sourceAnchors', 'connectionAnchors', 'plumbConfig', function(app, sourceAnchors, connectionAnchors, opts) {
+angular.module('characterApp').directive('ngPlumb', ['$rootScope', 'sourceAnchors', 'connectionAnchors', 'plumbConfig', 'PlumbService', function(app, sourceAnchors, connectionAnchors, opts, plumb) {
 	function link (scope,element,attrs) {
 		var node = $(element)[0];
-		node.id = "node_" + scope.skill.id;
+		var text = $(element).find(".nodeText")[0];
+		var create = $(element).find(".nodeCreate")[0];
+		$(node).attr("id", "node_" + scope.skill.id);
+		$(text).attr("id", "nodeText_" + scope.skill.id)
+		$(create).attr("id", "nodeCreate_" + scope.skill.id);
 		
 		app.jsPlumbInstance.bind("connection", function(i,c) {
 			var parent = $(i.source).closest(".node").scope();
 			var child = $(i.target).closest(".node").scope();
+			var arr=app.jsPlumbInstance.getConnections({source:i.sourceId,target:i.targetId});
+			if(arr.length>1){
+				app.jsPlumbInstance.detach(i);
+			}
 			parent.skill.connections.push(child.skill.id);
 			parent.skill.connections = parent.skill.connections.filter(function(value, index, self){return self.indexOf(value) === index;});
 			console.log("made connection");
@@ -30,28 +38,6 @@ angular.module('characterApp').directive('ngPlumb', ['$rootScope', 'sourceAnchor
 			scope.skill.position.top = pos.top;
 			repaint();
 		}
-
-		function makeConnections(node, scope){
-			var el = $(node).find(".nodeCreate")[0].id;// + node.skill.id;
-			for(var i=0; i<scope.skill.connections.length; i++){
-				var targ = $("#node_" + scope.skill.connections[i]).find(".nodeText")[0].id;// + node.skill.connections[i];
-				connect(el,targ);//,20);
-			}
-		}
-
-		function attemptConnect(el, targ, tries){
-			if($("#"+targ).length > 0 && $("#"+el).length > 0){
-				connect(el,targ);
-				repaint();
-			}
-			else if(tries > 0){
-				setTimeout(function(){attemptConnect(el,targ, tries-1);},500);
-			}
-		}
-
-		function connect(el, targ){
-			app.jsPlumbInstance.connect({source:el, target:targ});
-		}
 		
 		var outOfBounds = function(){
 			if($(this).position().top < $("#mainBanner").height())
@@ -68,7 +54,7 @@ angular.module('characterApp').directive('ngPlumb', ['$rootScope', 'sourceAnchor
 		// suspend drawing and initialize.
 		app.jsPlumbInstance.doWhileSuspended(function() {
 
-			app.jsPlumbInstance.makeSource($(node).find(".nodeCreate"), {					
+			app.jsPlumbInstance.makeSource($("#" + create.id), {					
 				filter:function(evt, el) {
 					var t = evt.target || evt.srcElement;
 					return t.tagName !== "A";
@@ -77,12 +63,12 @@ angular.module('characterApp').directive('ngPlumb', ['$rootScope', 'sourceAnchor
 				maxConnections:-1
 			});			
 			
-			app.jsPlumbInstance.makeTarget($(node).find(".nodeText"), {				
+			app.jsPlumbInstance.makeTarget($("#"+text.id), {				
 				dropOptions:{ hoverClass:"hover" },
 				uniqueEndpoint:false
 			});
 
-			setTimeout(function(){makeConnections(node, scope);},0);
+			setTimeout(function(){plumb.makeConnections(node, scope.skill.connections);},0);
 		});
 
 		jsPlumb.fire("nodeCreated", app.jsPlumbInstance);

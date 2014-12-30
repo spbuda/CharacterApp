@@ -32,22 +32,31 @@ angular.module('characterApp').controller('SkillController', ['$scope', 'PlumbSe
 	}
 	
 	function removeWithUndo(item){
-		setUndo(remove(item));
+		var removed = remove(item);
+		setUndo(removed);
 	}
 	
 	function remove(item){
-		PlumbService.remove(item);
+		var connections = PlumbService.remove(item);
 		var index = $scope.character.skill.skills.indexOf(item.skill);
-		return $scope.character.skill.skills.splice(index,1);
+		var element = [{item:$scope.character.skill.skills.splice(index,1)[0], connections:connections}];
+		return element;
 	}
 	
 	function undo(){
 		var undid = $scope.undoBuffer.shift();
 		if(undid != null){
-			$scope.character.skill.skills.push(undid);
+			$scope.character.skill.skills.push(undid.item);
+			setTimeout(function(){undoConnections(undid.connections)},0);
 		}
 		else{
 			console.log("Nothing to undo");
+		}
+	}
+	
+	function undoConnections(connections){
+		for(var i=0;i<connections.length;i++){
+			PlumbService.connect(connections[i].source, connections[i].target);
 		}
 	}
 	
