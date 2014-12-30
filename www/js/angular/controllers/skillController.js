@@ -25,7 +25,8 @@ angular.module('characterApp').controller('SkillController', ['$scope', function
 	}
 	
 	function remove(item){
-		$scope.character.skill.skills.splice(item.skill.id,1);
+		var index = $scope.character.skill.skills.indexOf(item.skill);
+		$scope.character.skill.skills.splice(index,1);
 	}
 	
 	$scope.addSkill = function(){

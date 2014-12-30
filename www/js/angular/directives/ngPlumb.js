@@ -1,4 +1,4 @@
-angular.module('characterApp').directive('ngPlumb', ['$rootScope', function(app) {
+angular.module('characterApp').directive('ngPlumb', ['$rootScope', 'sourceAnchors', 'connectionAnchors', function(app, sourceAnchors, connectionAnchors) {
 	function link (scope,element,attrs) {
 		var node = $(element)[0];
 		node.id = "node_" + scope.skill.id;
@@ -14,7 +14,8 @@ angular.module('characterApp').directive('ngPlumb', ['$rootScope', function(app)
 		app.jsPlumbInstance.bind("connectionDetached", function(i,c) {
 			var parent = $(i.source).closest(".node").scope();
 			var child = $(i.target).closest(".node").scope();
-			parent.skill.connections.splice(child.skill.id,1);
+			var index = parent.skill.connections.indexOf(child.skill.id);
+			parent.skill.connections.splice(index,1);
 			console.log("removed connection");
 		});
 		
@@ -34,24 +35,25 @@ angular.module('characterApp').directive('ngPlumb', ['$rootScope', function(app)
 			var el = $(node).find(".nodeCreate")[0].id;// + node.skill.id;
 			for(var i=0; i<scope.skill.connections.length; i++){
 				var targ = $("#node_" + scope.skill.connections[i] + " .nodeText")[0].id;// + node.skill.connections[i];
-				setTimeout(function(){attemptConnect(el,targ,20);},1000);
+				attemptConnect(el, targ,20);
 			}
 		}
 
-		function attemptConnect(el, targ, trys){
+		function attemptConnect(el, targ, tries){
 			if($("#"+targ).length > 0 && $("#"+el).length > 0){
 				connect(el,targ);
 				repaint();
 			}
-			else if(trys > 0){
-				setTimeout(function(){attemptConnect(el,targ, trys-1);},500);
+			else if(tries > 0){
+				setTimeout(function(){attemptConnect(el,targ, tries-1);},500);
 			}
 		}
 
 		function connect(el, targ){
 			jsPlumb.connect({source:el, target:targ,
 			endpointStyles : [{ fillStyle:"rgba(107, 164, 94, 1)" }, { fillStyle:"rgba(221, 221, 221, 1)" }],
-			endpoints : [ ["Dot", { radius:6 } ], [ "Dot", { radius:6 } ] ],
+			endpoints : [ ["Dot", { radius:1, enabled:false } ], [ "Dot", { radius:6 } ] ],
+			anchors : [ sourceAnchors, connectionAnchors ],
 			paintStyle : {strokeStyle:"rgba(107, 164, 94, 1)", lineWidth:3}});
 		}
 		
@@ -65,9 +67,9 @@ angular.module('characterApp').directive('ngPlumb', ['$rootScope', function(app)
 		}
 
 		// make them draggable
-		app.jsPlumbInstance.draggable($(node), {revert:outOfBounds, drag:repaint, stop:update});
+		app.jsPlumbInstance.draggable($(node), {revert:outOfBounds, drag:repaint, stop:update, handle:".nodeText"});
 
-		// suspend drawing and initialise.
+		// suspend drawing and initialize.
 		app.jsPlumbInstance.doWhileSuspended(function() {
 
 			app.jsPlumbInstance.makeSource($(node).find(".nodeCreate"), {					
@@ -84,9 +86,7 @@ angular.module('characterApp').directive('ngPlumb', ['$rootScope', function(app)
 				uniqueEndpoint:false
 			});
 
-		    if (scope.$last){
-		      makeConnections(node, scope);
-		    }
+			setTimeout(function(){makeConnections(node, scope);},100);
 		});
 
 		jsPlumb.fire("nodeCreated", app.jsPlumbInstance);
