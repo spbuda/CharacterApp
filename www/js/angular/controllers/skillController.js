@@ -16,7 +16,7 @@ angular.module('characterApp').controller('SkillController', ['$scope', 'PlumbSe
 		this.skill = exists(skill) ? skill : "";
 		this.rolls = exists(rolls) ? rolls : [];
 		this.position = exists(position) ? position : {left:50, top:75};
-		this.connections = exists(connections) ? connections : [];
+		this.connections = exists(connections) ? connections : {};
 	}
 	
 	$scope.checkRemove = function(item){

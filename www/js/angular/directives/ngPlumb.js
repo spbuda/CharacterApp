@@ -7,28 +7,42 @@ angular.module('characterApp').directive('ngPlumb', ['$rootScope', 'sourceAnchor
 		$(text).attr("id", "nodeText_" + scope.skill.id)
 		$(create).attr("id", "nodeCreate_" + scope.skill.id);
 		
+		console.log("plumb created: { id:" + scope.skill.id + ", skill:\"" + scope.skill.skill + "\" }")
+		
 		app.jsPlumbInstance.bind("connection", function(i,c) {
 			var parent = $(i.source).closest(".node").scope();
 			var child = $(i.target).closest(".node").scope();
 			var arr=app.jsPlumbInstance.getConnections({source:i.sourceId,target:i.targetId});
 			if(arr.length>1){
 				app.jsPlumbInstance.detach(i);
+				console.log("connection denied: "+ parent.skill.id + " -> " + child.skill.id);
 			}
-			parent.skill.connections.push(child.skill.id);
-			parent.skill.connections = parent.skill.connections.filter(function(value, index, self){return self.indexOf(value) === index;});
-			console.log("made connection");
+			else{
+				var unique = function(value, index, self){
+					return self.indexOf(value) === index;
+				};
+				parent.skill.connections[child.skill.id] = child.skill.id;
+				console.log("connection made: " + parent.skill.id + " -> " + child.skill.id);
+			}
 		});
 		
 		app.jsPlumbInstance.bind("connectionDetached", function(i,c) {
 			var parent = $(i.source).closest(".node").scope();
 			var child = $(i.target).closest(".node").scope();
-			var index = parent.skill.connections.indexOf(child.skill.id);
-			parent.skill.connections.splice(index,1);
-			console.log("removed connection");
+			delete parent.skill.connections[child.skill.id];
+			console.log("connection removed: " + parent.skill.id + " -> " + child.skill.id);
 		});
 		
-		function repaint(){
-			app.jsPlumbInstance.repaintEverything()
+		function repaint(skill){
+//			app.jsPlumbInstance.doWhileSuspended(function() {
+			if(typeof skill != "undefined" && skill != null){
+				var id = skill.id;
+				app.jsPlumbInstance.repaint(["node_"+id, "nodeText_"+id, "nodeCreate_"+id]);
+			}
+			else{
+				app.jsPlumbInstance.repaintEverything();
+			}
+//			});
 		}
 		
 		function update() {
@@ -36,7 +50,7 @@ angular.module('characterApp').directive('ngPlumb', ['$rootScope', 'sourceAnchor
 			if(scope.skill.position === null) scope.skill.position={};
 			scope.skill.position.left = pos.left;
 			scope.skill.position.top = pos.top;
-			repaint();
+			repaint(scope.skill);
 		}
 		
 		var outOfBounds = function(){
@@ -49,7 +63,7 @@ angular.module('characterApp').directive('ngPlumb', ['$rootScope', 'sourceAnchor
 		}
 
 		// make them draggable
-		app.jsPlumbInstance.draggable($(node), {revert:outOfBounds, drag:repaint, stop:update, handle:".nodeText"});
+		app.jsPlumbInstance.draggable($(node), {revert:outOfBounds, drag:update, stop:update, handle:".nodeText"});
 
 		// suspend drawing and initialize.
 		app.jsPlumbInstance.doWhileSuspended(function() {

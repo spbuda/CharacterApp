@@ -28,6 +28,11 @@ angular.module('characterApp',['xc.indexedDB', 'ngRoute', 'ngAnimate'])
 			controller: 'SkillController',
 			controllerAs: 'skillController'
 		})
+		.when('/skills.debug', {
+			templateUrl: '/page/skillsDebug.html',
+			controller: 'SkillController',
+			controllerAs: 'skillController'
+		})
 		.when('/bio', {
 			templateUrl: '/page/bio.html',
 			controller: 'BioController',

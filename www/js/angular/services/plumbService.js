@@ -37,9 +37,11 @@ angular.module('characterApp').service('PlumbService', ['$rootScope', 'sourceAnc
 
 	function makeConnections(node, connections){
 		var el = $(node).find(".nodeCreate")[0].id;
-		for(var i=0; i<connections.length; i++){
-			var targ = $("#node_" + connections[i]).find(".nodeText")[0].id;
-			connect(el,targ);//,20);
+		for(var i in connections){
+			if (connections.hasOwnProperty(i)) {
+				var targ = "nodeText_" + i;
+				connect(el,targ);//,20);
+			}
 		}
 	}
 
