@@ -2,7 +2,28 @@ angular.module('characterApp',['xc.indexedDB', 'ngRoute', 'ngAnimate'])
 .constant('dbName', 'character')
 .constant('storeName', 'character')
 .constant('version', 1)
-.constant('emptyCharacter', {guid:"",bio:{},item:{items:[]},map:{},skill:{skill_id:0,skills:[]},trait:{}})
+.constant('emptyCharacter', {
+	guid:"",
+	bio:{
+		history:"", 
+		profession:"",
+		scars:""
+	},
+	item:{
+		items:[]
+	},
+	map:{
+		position:{left:0,top:0}
+	},
+	skill:{
+		skill_id:0,skills:[]
+	},
+	trait:{
+		alignment:{x:0,y:0},
+		personality:{x:0,y:0},
+		something:{x:0,y:0}
+	}
+})
 .constant('sourceAnchors', [[ 0.05, 1, 0, 1 ],[ 0.27, 1, 0, 1 ],[ 0.5, 1, 0, 1 ],[ 0.73, 1, 0, 1 ],[ 0.95, 1, 0, 1 ]])
 .constant('connectionAnchors', [[ 0.00, 0.75, 0, 0 ],[ 0.00, 0, 0, 0 ],[ 0.25, 0, 0, 0 ],[ 0.5, 0, 0, 0 ],[ 0.75, 0, 0, 0 ],[ 1, 0, 0, 0 ],[ 1, 0.75, 0, 0 ]])
 .constant('plumbConfig', {
