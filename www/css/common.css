@@ -2,8 +2,7 @@ body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#E4E4E4;
-    background-image:linear-gradient(top, #A19898 0%, #BDBDBD 51%);
+    background-color:#BDBDBD;
     background-image:-webkit-linear-gradient(top, #A19898 0%, #BDBDBD 51%);
     background-image:-ms-linear-gradient(top, #A19898 0%, #BDBDBD 51%);
     background-image:-webkit-gradient(
@@ -13,6 +12,7 @@ body {
 		color-stop(0, #A19898),
 		color-stop(0.51, #BDBDBD)
 	);
+    background-image:linear-gradient(top, #A19898 0%, #BDBDBD 51%);
     background-attachment:fixed;
     font-family: Futura,Trebuchet MS,Arial,sans-serif;
     font-size:20px;
@@ -26,6 +26,25 @@ body {
 :focus {
 	outline-color: rgba(255, 215, 100, 1);
 	outline-size: .2em;
+}
+
+.inline-block{
+	display:inline-block;
+}
+
+.half{
+	width:49%;
+}
+
+.fl{
+	float:left;
+}
+.fr{
+	float:right;
+}
+
+.clear{
+	clear:both;
 }
 
 textarea, input[type='text']{
@@ -138,6 +157,11 @@ textarea{
 
 .box{
 	border-radius: .2em;
+}
+
+.box.noTop{
+	border-top: none;
+	padding:0;
 }
 
 .nodeText{

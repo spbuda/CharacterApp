@@ -44,6 +44,16 @@ angular.module('characterApp').service('PlumbService', ['$rootScope', 'sourceAnc
 			}
 		}
 	}
+	
+	function repaint(skill){
+		if(typeof skill != "undefined" && skill != null){
+			var id = skill.id;
+			app.jsPlumbInstance.repaint(["node_"+id, "nodeText_"+id, "nodeCreate_"+id]);
+		}
+		else{
+			app.jsPlumbInstance.repaintEverything();
+		}
+	}
 
 	function connect(el, targ){
 		app.jsPlumbInstance.connect({source:el, target:targ});
@@ -52,6 +62,7 @@ angular.module('characterApp').service('PlumbService', ['$rootScope', 'sourceAnc
 	return {
 		makeConnections : makeConnections,
 		connect : connect,
-		remove : removePlumb
+		remove : removePlumb,
+		repaint : repaint
 	};
 }]);

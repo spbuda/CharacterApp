@@ -1,15 +1,35 @@
 <div class="content">
 	<br/>
 	<div class="box bottom-space">
+		<div class="box noTop bottom-space">
+			<div class="fl half">
+				<label>Name</label>
+				<input type="text" class="fill" ng-model="character.bio.name"></input>
+			</div>
+			<div class="fr half">
+				<label>Concept</label>
+				<input type="text" class="fill" ng-model="character.bio.concept"></input>
+			</div>
+		</div>
+		<div class="clear">
+		</div>
+	</div>
+	<div class="box bottom-space">
 		<label>Profession</label>
 		<input type="text" class="fill" ng-model="character.bio.profession"></input>
 	</div>
 	<div class="box bottom-space">
-		<label>History</label>
-		<textarea class="fill" ng-model="character.bio.history"></textarea>
-	</div>
-	<div class="box bottom-space">
-		<label>Scars</label>
-		<textarea class="fill" ng-model="character.bio.scars"></textarea>
+		<div class="box noTop bottom-space">
+			<div class="fl half">
+				<label>Good</label>
+				<textarea class="fill" ng-model="character.bio.history.good"></textarea>
+			</div>
+			<div class="fr half">
+				<label>Bad</label>
+				<textarea class="fill" ng-model="character.bio.history.bad"></textarea>
+			</div>
+		</div>
+		<div class="clear">
+		</div>
 	</div>
 </div>

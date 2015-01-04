@@ -4,12 +4,12 @@
 	<span id="undo" class="btn" ng-click="undo()" ng-class="(undoBuffer.length < 1)?'disabled':''"><i class="fa fa-undo"></i></span>
 </div>
 <div ng-plumb-area class="plumb content" id="plumb">
-	<div ng-plumb ng-repeat="skill in character.skill.skills track by $index" class="node" ng-class="(deleteSkills === true)?'delete':''" ng-click="checkRemove(this)" style="left:{{skill.position.left}}px; top:{{skill.position.top}}px">
-		<div class="nodeText">{{skill.id}}: {{skill.skill}}<br/>{{skill.connections}}</div>
+	<div ng-plumb ng-repeat="skill in character.skill.skills track by $index" id="{{'node_' + skill.id}}" class="node" ng-class="(deleteSkills === true)?'delete':''" ng-click="checkRemove(this)" style="left:{{skill.position.left}}px; top:{{skill.position.top}}px">
+		<div class="nodeText" id="{{'nodeText_' + skill.id}}">{{skill.id}}: {{skill.skill}}<br/>{{skill.connections}}</div>
 		<div class="nodeButtons">
 			<div class="nodeNumber" ng-click="editNumber(this)"><div ng-repeat="roll in skill.rolls">{{roll}}</div></div>
 			<div class="nodeEdit" ng-click="editText(this)"><i class="fa" ng-class="(deleteSkills === true)?'fa-trash':'fa-pencil-square-o'"></i></div>
-			<div class="nodeCreate"></div>
+			<div class="nodeCreate" id="{{'nodeCreate_' + skill.id}}"></div>
 		</div>
 	</div>
 </div>

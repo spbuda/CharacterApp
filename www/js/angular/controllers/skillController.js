@@ -1,4 +1,4 @@
-angular.module('characterApp').controller('SkillController', ['$scope', 'PlumbService', function($scope, PlumbService) {
+angular.module('characterApp').controller('SkillController', ['$scope', 'PlumbService', function($scope, plumb) {
 	//TODO: Undo
 	
 	function getSkillId(){
@@ -37,7 +37,7 @@ angular.module('characterApp').controller('SkillController', ['$scope', 'PlumbSe
 	}
 	
 	function remove(item){
-		var connections = PlumbService.remove(item);
+		var connections = plumb.remove(item);
 		var index = $scope.character.skill.skills.indexOf(item.skill);
 		var element = [{item:$scope.character.skill.skills.splice(index,1)[0], connections:connections}];
 		return element;
@@ -56,8 +56,9 @@ angular.module('characterApp').controller('SkillController', ['$scope', 'PlumbSe
 	
 	function undoConnections(connections){
 		for(var i=0;i<connections.length;i++){
-			PlumbService.connect(connections[i].source, connections[i].target);
+			plumb.connect(connections[i].source, connections[i].target);
 		}
+		setTimeout(plumb.repaint,0);
 	}
 	
 	$scope.undo = function(){

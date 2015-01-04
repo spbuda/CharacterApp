@@ -5,9 +5,10 @@ angular.module('characterApp',['xc.indexedDB', 'ngRoute', 'ngAnimate'])
 .constant('emptyCharacter', {
 	guid:"",
 	bio:{
-		history:"", 
-		profession:"",
-		scars:""
+		name:"",
+		concept:"",
+		history:{good:"",bad:""}, 
+		profession:""
 	},
 	item:{
 		items:[]
@@ -19,9 +20,9 @@ angular.module('characterApp',['xc.indexedDB', 'ngRoute', 'ngAnimate'])
 		skill_id:0,skills:[]
 	},
 	trait:{
-		alignment:{x:0,y:0},
-		personality:{x:0,y:0},
-		something:{x:0,y:0}
+		alignment:{x:0,y:0,r:0},
+		attitude:{x:0,y:0,r:0},
+		outlook:{x:0,y:0,r:0}
 	}
 })
 .constant('sourceAnchors', [[ 0.05, 1, 0, 1 ],[ 0.27, 1, 0, 1 ],[ 0.5, 1, 0, 1 ],[ 0.73, 1, 0, 1 ],[ 0.95, 1, 0, 1 ]])
