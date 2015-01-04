@@ -69,7 +69,17 @@ textarea{
 	margin-top:1.5em;
 }
 
-.modal{display:none;}
+.modal{
+	display:none;
+	min-width:10em;
+	width:70%;
+}
+.modal input, .modal textarea{
+	width:142%;
+}
+.modal textarea{
+	height:5em;
+}
 #simplemodal-overlay {background-color:#000;}
 #simplemodal-container {background-color:#333; border:8px solid #444; padding:12px;}
 
@@ -79,6 +89,7 @@ textarea{
 	color: rgba(0, 0, 0, 0.7);
 	background-color: rgba(221, 221, 221, 1);
 	border-bottom: solid 1px rgba(155, 132, 132, 1);
+	border-top: solid 1px rgba(155, 132, 132, 1);
 	border-radius: .1em;
 	display: inline-block;
 	line-height: normal;
@@ -88,6 +99,16 @@ textarea{
 	cursor: pointer;
 	-moz-user-select: none;
 	text-decoration: none;
+}
+.btn.left{
+	border-top-left-radius: 1em;
+	border-bottom-left-radius: 1em;
+	margin-right:-1em;
+}
+.btn.right{
+	border-top-right-radius: 1em;
+	border-bottom-right-radius: 1em;
+	margin-left:-1em;
 }
 
 .stickied{
@@ -132,6 +153,50 @@ textarea{
 	margin: 0 auto;
 }
 
+.box, .nodeText{
+	border-top: solid 1px rgba(155, 132, 132, 1);
+	color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(221, 221, 221, 1);
+	padding: 0.5em 1em .8em;
+}
+
+.box{
+	border-radius: .2em;
+	border-bottom: solid 1px rgba(155, 132, 132, 1);
+}
+
+.box.noBorder{
+	border: none;
+}
+.box.nest{
+	padding:0;
+}
+
+//	items
+
+.itemDesc{
+	width:99%;
+}
+
+.itemCount{
+	min-width:5em;
+}
+
+.itemList{
+	width:100%;
+	border-spacing: 1em 0;
+	border-collapse: collapse;
+}
+.itemList tr td{
+	padding:.25em;
+}
+
+.noWrap{
+	white-space:nowrap;
+}
+
+//	skills	-	jsPlumbElement Styles
+
 .plumb{
 	min-height:25em;
 	height:auto;
@@ -146,22 +211,6 @@ textarea{
 .node.delete > div.nodeText, .node.delete > div.nodeButtons > div, .disabled{
 	background: darkgray;
 	color: gray;
-}
-
-.box, .nodeText{
-	border-top: solid 1px rgba(155, 132, 132, 1);
-	color: rgba(0, 0, 0, 0.7);
-	background-color: rgba(221, 221, 221, 1);
-	padding: 0.5em 1em .8em;
-}
-
-.box{
-	border-radius: .2em;
-}
-
-.box.noTop{
-	border-top: none;
-	padding:0;
 }
 
 .nodeText{

@@ -1,1 +1,38 @@
-<img src="/img/frown.jpg" style="width:50%"></img>
+<div class="stickied">
+	<span id="addItem" class="btn" ng-click="addItem()"><i class="fa fa-plus-square-o"></i></span>
+</div>
+<div style="margin:auto 5em auto 1em">
+	<div class="content box">
+		<table class="itemList">
+			<thead>
+				<tr>
+					<th>Description</th>
+					<th>Amount</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in character.item.items track by $index" class="item box" ng-class="itemDisplay(item)">
+					<td class="itemDesc" style="width:99%" ng-click="editDescription(item)" ng-class="item.count < 1 ? 'disabled':''">{{item.description}}</td>
+					<td class="noWrap" ng-class="item.count < 1 ? 'disabled':''">
+						<span class="btn left" ng-click="decrementCount(item)"><i class="fa fa-minus"></i></span>
+						<span class="itemCount btn" ng-click="editCount(item)">{{item.count}}</span>
+						<span class="btn right" ng-click="incrementCount(item)"><i class="fa fa-plus"></i></span>
+					</td>
+					<td class="itemButtons noWrap">
+						<span class="btn" ng-click="toggleDisabled(item)"><i class="fa" ng-class="!item.disabled ? 'fa-check-circle-o':'fa-ban'"></i></span>
+						<span class="btn" ng-click="removeItem(item)"><i class="fa fa-trash"></i></span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!-- Modals -->
+<div id="editItemTextModal" class="modal">
+	<input type="text"></input>
+</div>
+
+<div id="editItemCountModal" class="modal">
+	<input type="text"></input>
+</div>
