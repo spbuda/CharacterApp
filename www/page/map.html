@@ -1,1 +1,9 @@
-<img src="/img/mappityMap.jpg" class="map" ></img>
+<div id="mapClear" class="btn map-tab">Clear</div>
+<div class="clear"></div>
+<div style="display:inline-block">
+<div class="ci-external axis">
+	<div class="ci-internal">
+		<img src="/img/mappityMap.jpg" class="ci-image map" id="mapAxis"/>
+		<canvas ng-draw image-selector="#mapAxis" clear-button="#mapClear" ng-model="map.data" id="alignment" class="ci-canvas axis"></canvas>
+	</div>
+</div>

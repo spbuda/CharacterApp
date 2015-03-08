@@ -10,7 +10,7 @@ mimeTypes = {
     "png": "image/png",
     "js": "text/javascript",
     "css": "text/css"},
-port = 8081,
+port = 8080,
 fallback = true,
 fallbackPath = "index.html";
 	

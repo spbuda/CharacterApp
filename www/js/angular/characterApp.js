@@ -8,21 +8,22 @@ angular.module('characterApp',['xc.indexedDB', 'ngRoute', 'ngAnimate'])
 		name:"",
 		concept:"",
 		history:{good:"",bad:""}, 
-		profession:""
+		profession:"",
+		progression_points:0
 	},
 	item:{
 		items:[]
 	},
 	map:{
-		position:{left:0,top:0}
+		position:{data:""}
 	},
 	skill:{
 		skill_id:0,skills:[]
 	},
 	trait:{
-		alignment:{x:0,y:0,r:0},
-		attitude:{x:0,y:0,r:0},
-		outlook:{x:0,y:0,r:0}
+		alignment:{data:""},
+		attitude:{data:""},
+		outlook:{data:""}
 	}
 })
 .constant('sourceAnchors', [[ 0.05, 1, 0, 1 ],[ 0.27, 1, 0, 1 ],[ 0.5, 1, 0, 1 ],[ 0.73, 1, 0, 1 ],[ 0.95, 1, 0, 1 ]])
