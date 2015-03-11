@@ -13,7 +13,7 @@ mimeTypes = {
 port = 8081,
 fallback = true,
 fallbackPath = "index.html";
-	
+
 my_http.createServer(function(request,response){
 	var my_path = url.parse(request.url).pathname;
 	var full_path = path.join(process.cwd(),my_path);
@@ -21,33 +21,47 @@ my_http.createServer(function(request,response){
 	sys.puts("Requesting Path: " + full_path);
 	var mimeType = mimeTypes[path.extname(full_path).split(".")[1]];
 	sys.puts("With MIMETYPE of: " + mimeType);
-	path.exists(full_path,function(exists){
+	filesys.exists(full_path,function(exists){
 		if(!exists && !fallback){
-			response.writeHeader(404, {"Content-Type": "text/plain"});  
-			response.write("404 Not Found\n");  
+			response.writeHeader(404, {"Content-Type": "text/plain"});
+			response.write("404 Not Found\n");
 			response.end();
 		}
 		else if(!exists && fallback){
 			filesys.readFile(fallbackPath, "binary", function(err, file) {
-				response.writeHeader(200, {"Content-Type": mimeTypes["html"]});  
-		        response.write(file, "binary");  
-		        response.end();
+				try{
+					response.writeHeader(200, {"Content-Type": mimeTypes["html"]});
+					response.write(file, "binary");
+					response.end();
+				}
+				catch(e){
+					console.log(e);
+					if(response != null)
+						response.end();
+				}
 			});
 		}
 		else{
-			filesys.readFile(full_path, "binary", function(err, file) {  
+			filesys.readFile(full_path, "binary", function(err, file) {
 			     if(err) {
-			         response.writeHeader(500, {"Content-Type": "text/plain"});  
-			         response.write(err + "\n");  
-			         response.end();  
-			   
-			     }  
+			         response.writeHeader(500, {"Content-Type": "text/plain"});
+			         response.write(err + "\n");
+			         response.end();
+
+			     }
 				 else{
-					response.writeHeader(200, {"Content-Type": mimeType});  
-			        response.write(file, "binary");  
-			        response.end();
+					try{
+						response.writeHeader(200, {"Content-Type": mimeType});
+						response.write(file, "binary");
+						response.end();
+					}
+					catch(e){
+						console.log(e);
+						if(response != null)
+							response.end();
+					}
 				}
-					 
+
 			});
 		}
 	});
