@@ -1,1 +1,35 @@
-<img src="/img/Espy.png" style="width:50%"></img>
+<div style="display:inline-block">
+<div class="ci-external axis">
+	<div class="ci-internal">
+		<div class="px-text">Chaos</div>
+		<div class="nx-text">Law</div>
+		<div class="py-text" style="left:-1.9em">Good</div>
+		<div class="ny-text" style="left:-1.5em">Evil</div>
+		<img src="/img/axis.png" class="ci-image axis" id="alignmentAxis"/>
+		<canvas ng-draw image-selector="#alignmentAxis" clear-button="#alignmentClear" ng-model="character.trait.alignment.data" id="alignment" class="ci-canvas axis"></canvas>
+		<div id="alignmentClear" class="btn clear-btn">Clear</div>
+	</div>
+</div>
+<div class="ci-external">
+	<div class="ci-internal axis">
+		<div class="px-text">Uptight</div>
+		<div class="nx-text">Chill</div>
+		<div class="py-text" style="left:-2.6em">Average</div>
+		<div class="ny-text" style="left:-2.2em">Boring</div>
+		<img src="/img/axis.png" class="ci-image axis" id="attitudeAxis"/>
+		<canvas ng-draw image-selector="#attitudeAxis" clear-button="#attitudeClear" ng-model="character.trait.attitude.data" id="attitude" class="ci-canvas axis"></canvas>
+		<div id="attitudeClear" class="btn clear-btn">Clear</div>
+	</div>
+</div>
+<div class="ci-external">
+	<div class="ci-internal axis">
+		<div class="px-text">Down</div>
+		<div class="nx-text">Up</div>
+		<div class="py-text" style="left:-3.1em">Forgiving</div>
+		<div class="ny-text" style="left:-3.6em">Begrudging</div>
+		<img src="/img/axis.png" class="ci-image axis" id="outlookAxis"/>
+		<canvas ng-draw image-selector="#outlookAxis" clear-button="#outlookClear" ng-model="character.trait.outlook.data" id="outlook" class="ci-canvas axis"></canvas>
+		<div id="outlookClear" class="btn clear-btn">Clear</div>
+	</div>
+</div>
+</div>
