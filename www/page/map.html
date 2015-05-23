@@ -4,6 +4,6 @@
 <div class="ci-external axis">
 	<div class="ci-internal">
 		<img src="/img/mappityMap.jpg" class="ci-image map" id="mapAxis"/>
-		<canvas ng-draw image-selector="#mapAxis" clear-button="#mapClear" ng-model="character.map.position.data" id="alignment" class="ci-canvas axis"></canvas>
+		<canvas ng-if="character != null" ng-draw image-selector="#mapAxis" clear-button="#mapClear" ng-model="character.map.position.data" id="alignment" class="ci-canvas axis"></canvas>
 	</div>
 </div>
